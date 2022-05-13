@@ -45,10 +45,13 @@ const Router = () => {
         },
       ],
     },
+<<<<<<< HEAD
     {
       path: "*",
       element: <NotFound />,
     },
+=======
+>>>>>>> e5a1f0cb09894610aa241e6c9882b2348f339824
   ]);
 };
 
