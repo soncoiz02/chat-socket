@@ -10,6 +10,7 @@ const AppStyle = styled("div")`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
   position: relative;
   background-color: ${cyan[50]};
   padding: 15px 0;

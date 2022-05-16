@@ -1,10 +1,10 @@
-import { Avatar, Button, Container, styled, Typography } from '@mui/material'
-import { blueGrey, grey } from '@mui/material/colors'
+import HomeIcon from '@mui/icons-material/Home'
+import LogoutIcon from '@mui/icons-material/Logout'
+import { Avatar, Button, styled, Typography } from '@mui/material'
+import { blueGrey } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import HomeIcon from '@mui/icons-material/Home';
-import LogoutIcon from '@mui/icons-material/Logout';
 
 const UserWrapper = styled('div')`
     display: flex;

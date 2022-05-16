@@ -12,11 +12,12 @@ const SearchBox = styled("form")`
 
 const SearchInput = styled(InputBase)(({ theme }) => ({
   width: "100%",
-  padding: "5px 20px 5px 10px",
+  padding: "10px 20px 10px 15px",
   color: grey[700],
   borderRadius: 50,
-  border: "1px solid #e0e0e0",
-  fontSize: "0.8rem",
+  fontSize: 16,
+  backgroundColor: "rgba(255, 255, 255, 0.8)",
+  boxShadow: `0 5px 10px 1px rgba(0, 0, 0, 0.1)`,
 }));
 
 const ButtonIcon = styled("button")`
