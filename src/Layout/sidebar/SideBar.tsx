@@ -8,7 +8,7 @@ const SideBarStyle = styled("div")`
   flex-direction: column;
   flex-shrink: 0;
   width: 350px;
-  height: calc(100vh - 115px);
+  height: 100%;
   gap: 30px 0;
   z-index: 999;
 `;

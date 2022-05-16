@@ -14,12 +14,15 @@ const AppStyle = styled("div")`
   position: relative;
   background-color: ${cyan[50]};
   padding: 15px 0;
+  overflow: hidden;
 `;
 
 const Main = styled("div")`
   display: flex;
   position: relative;
   width: 100%;
+  height: calc(100vh - 115px);
+  gap: 0 30px;
 `;
 
 const Layout = () => {
