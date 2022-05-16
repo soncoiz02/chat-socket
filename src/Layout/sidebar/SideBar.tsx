@@ -21,6 +21,7 @@ const SideBarStyle = styled("div")`
   padding: 15px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   gap: 30px 0;
+  z-index: 999;
 `;
 
 const Detail = styled("div")`

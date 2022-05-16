@@ -1,5 +1,5 @@
 import { Avatar, Stack, styled, Box, Typography } from "@mui/material";
-import { green, grey } from "@mui/material/colors";
+import { green, grey, pink } from "@mui/material/colors";
 import React from "react";
 import { Link, LinkProps } from "react-router-dom";
 
@@ -10,9 +10,12 @@ const Item = styled(Link)<LinkProps>(({ theme }) => ({
   gap: "0 10px",
   textDecoration: "none",
   padding: " 8px 10px",
-  borderRadius: 5,
+  borderRadius: 10,
+  transition: "0.3s",
   ":hover": {
-    backgroundColor: grey[200],
+    backgroundColor: pink[100],
+    transform: "translateY(-5px)",
+    boxShadow: `0 5px 10px 1px rgba(0,0,0,0.1)`,
   },
 }));
 const CoverAvt = styled("div")`
@@ -26,7 +29,13 @@ const DetailUser = styled("div")`
 
 const ListUser = () => {
   return (
-    <Stack direction="column" spacing={1.5} height="100%" overflow="auto">
+    <Stack
+      direction="column"
+      padding="10px 0"
+      spacing={1.5}
+      height="100%"
+      overflow="auto"
+    >
       {users.map((user) => (
         <Item to={`/chat/${user.id}`} key={user.id}>
           <CoverAvt>
