@@ -10,7 +10,7 @@ const WrapHome = styled("div")`
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
+  border-radius: 15px;
   box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.1);
 `;
 
