@@ -1,6 +1,7 @@
 import React, { ElementType, lazy, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import Layout from "../Layout/Layout";
+import CheckAuth from "./CheckAuth";
 
 const Loadable = (Component: ElementType) => (props: any) => {
   return (
@@ -24,11 +25,19 @@ const Router = () => {
       children: [
         {
           index: true,
-          element: <Home />,
+          element: (
+            <CheckAuth>
+              <Home />
+            </CheckAuth>
+          ),
         },
         {
           path: "chat/:id",
-          element: <ChatRoom />,
+          element: (
+            <CheckAuth>
+              <ChatRoom />
+            </CheckAuth>
+          ),
         },
       ],
     },
