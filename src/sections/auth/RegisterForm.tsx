@@ -1,14 +1,13 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { styled } from "@mui/material";
 import React from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import RHFTextField from "../../components/form/RHFTextField";
-import LoadingButton from "../../components/form/LoadingButton";
-import { styled } from "@mui/material";
-import { userApi } from "../../api/user";
-import { setUserInfor } from "../../redux/actions/user";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { userApi } from "../../api/user";
+import LoadingButton from "../../components/form/LoadingButton";
+import RHFTextField from "../../components/form/RHFTextField";
 
 const FormGroup = styled("form")`
   display: flex;
@@ -66,18 +65,13 @@ const RegisterForm = () => {
     try {
       const response = await userApi.createUser(data);
       const user = await response.user;
-      if (!!user) {
-        dispatch({
-          type: "SET_USER_INFOR",
-          payload: user,
-        });
-        navigate("/avatar");
-      } else {
-        const errorMessage = response.response.data.message;
-        setError("username", { message: errorMessage });
-      }
-    } catch (error) {
-      console.log(error);
+      dispatch({
+        type: "SET_USER_INFOR",
+        payload: user,
+      });
+      navigate("/avatar");
+    } catch (error: any) {
+      setError("username", { message: error.response.data.message });
     }
   };
 

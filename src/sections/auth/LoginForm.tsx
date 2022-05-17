@@ -1,8 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { styled } from "@mui/material";
+import { styled, Typography } from "@mui/material";
 import React from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { userApi } from "../../api/user";
 import LoadingButton from "../../components/form/LoadingButton";
 import RHFTextField from "../../components/form/RHFTextField";
 
@@ -15,6 +18,10 @@ const FormGroup = styled("form")`
 `;
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentUser = useSelector((state: any) => state.user.infor);
+
   const loginSchema = yup.object().shape({
     username: yup
       .string()
@@ -46,7 +53,21 @@ const LoginForm = () => {
   const handleLogin: SubmitHandler<{ username: string; password: string }> = (
     data
   ) => {
-    console.log(data);
+    login(data);
+  };
+
+  const login = async (data: { username: string; password: string }) => {
+    try {
+      const response = await userApi.login(data);
+      const user = await response.user;
+      dispatch({
+        type: "SET_USER_INFOR",
+        payload: user,
+      });
+      navigate("/");
+    } catch (error: any) {
+      setError("username", { message: error.response.data.message });
+    }
   };
 
   return (

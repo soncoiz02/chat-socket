@@ -1,5 +1,6 @@
 import { styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { USER_TYPE } from "../../@types/user";
 import { userApi } from "../../api/user";
 import ListUser from "./ListUser";
@@ -17,10 +18,14 @@ const SideBarStyle = styled("div")`
 
 const SideBar = () => {
   const [listUsers, setListUsers] = useState<USER_TYPE[]>([]);
+  const currentUser = useSelector((state: any) => state.user.infor);
   const getListUsers = async () => {
     try {
       const users = await userApi.getAllUser();
-      if (users) setListUsers(users);
+      if (users)
+        setListUsers(
+          users.filter((user: USER_TYPE) => user.id !== currentUser.id)
+        );
     } catch (error) {
       console.log(error);
     }

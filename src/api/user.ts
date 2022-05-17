@@ -22,4 +22,10 @@ export const userApi = {
   searchUsers(params: string): Promise<USER_TYPE[] | any> {
     return axiosClient.get(`/api/users?search=${params}`);
   },
+  login(user: {
+    username: string;
+    password: string;
+  }): Promise<USER_TYPE | any> {
+    return axiosClient.post("/api/signin", user);
+  },
 };
