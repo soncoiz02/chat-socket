@@ -8,6 +8,7 @@ import { styled } from "@mui/material";
 import { userApi } from "../../api/user";
 import { setUserInfor } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const FormGroup = styled("form")`
   display: flex;
@@ -18,6 +19,9 @@ const FormGroup = styled("form")`
 `;
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const registerSchema = yup.object().shape({
     username: yup
       .string()
@@ -58,16 +62,19 @@ const RegisterForm = () => {
     register(data);
   };
 
-  const navigate = useNavigate();
-
   const register = async (data: { username: string; password: string }) => {
     try {
-      const user = await userApi.createUser(data);
-      if (user.id) {
-        setUserInfor(user);
+      const response = await userApi.createUser(data);
+      const user = await response.user;
+      if (!!user) {
+        console.log(user);
+        dispatch({
+          type: "SET_USER_INFOR",
+          payload: user,
+        });
         navigate("/avatar");
       } else {
-        const errorMessage = user.response.data.message;
+        const errorMessage = response.response.data.message;
         setError("username", { message: errorMessage });
       }
     } catch (error) {

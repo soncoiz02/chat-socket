@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import { USER_TYPE } from "../../@types/user";
 
 const initialState: {
@@ -8,7 +9,7 @@ const initialState: {
   token: "",
 };
 
-const userReducers = (state = initialState, action: any) => {
+const userReducers = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case "SET_USER_INFOR":
       const user: USER_TYPE = action.payload;

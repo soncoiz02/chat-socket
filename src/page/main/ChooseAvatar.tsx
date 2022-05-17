@@ -1,6 +1,5 @@
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { cyan, teal } from "@mui/material/colors";
-import { stat } from "fs";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +52,7 @@ const listAvatars = [
 const ChooseAvatar = () => {
   const navigate = useNavigate();
   const currentUser = useSelector((state: any) => state.user.infor);
+  console.log(currentUser);
 
   const handleUpdateAvatar = async (link: string) => {
     try {
