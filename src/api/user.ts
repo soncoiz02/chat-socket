@@ -4,35 +4,22 @@ import axiosClient from "./axiosConfig";
 export type ID_TYPE = string | undefined;
 
 export const userApi = {
-  async getAllUser(): Promise<USER_TYPE[] | any> {
-    try {
-      return await axiosClient.get("/api/users");
-    } catch (error) {
-      return error;
-    }
+  getAllUser(): Promise<USER_TYPE[] | any> {
+    return axiosClient.get("/api/users");
   },
-  async getUser(id: ID_TYPE): Promise<USER_TYPE | any> {
-    try {
-      return await axiosClient.get(`/apiusers/${id}`);
-    } catch (error) {
-      return error;
-    }
+  getUser(id: ID_TYPE): Promise<USER_TYPE | any> {
+    return axiosClient.get(`/apiusers/${id}`);
   },
-  async createUser(user: {
+  createUser(user: {
     username: string;
     password: string;
   }): Promise<{ token: string; user: USER_TYPE } | any> {
-    try {
-      return await axiosClient.post("/api/signup", user);
-    } catch (error) {
-      return error;
-    }
+    return axiosClient.post("/api/signup", user);
   },
-  async updateAvatar(id: ID_TYPE, avatar: string): Promise<USER_TYPE | any> {
-    try {
-      return await axiosClient.patch(`/api/users/${id}`, { avatar });
-    } catch (error) {
-      return error;
-    }
+  updateAvatar(id: ID_TYPE, avatar: string): Promise<USER_TYPE | any> {
+    return axiosClient.patch(`/api/users/${id}`, { avatar });
+  },
+  searchUsers(params: string): Promise<USER_TYPE[] | any> {
+    return axiosClient.get(`/api/users?search=${params}`);
   },
 };

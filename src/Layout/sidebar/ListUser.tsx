@@ -36,21 +36,11 @@ const HeaderUser = styled("div")`
   width: 100%;
 `;
 
-const ListUser = () => {
-  const [listUsers, setListUsers] = useState<USER_TYPE[]>([]);
-  const getListUsers = async () => {
-    try {
-      const users = await userApi.getAllUser();
-      if (users) setListUsers(users);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+type PropsType = {
+  listUsers: USER_TYPE[];
+};
 
-  useEffect(() => {
-    getListUsers();
-  }, []);
-
+const ListUser = ({ listUsers }: PropsType) => {
   return (
     <Stack
       sx={{
@@ -64,7 +54,7 @@ const ListUser = () => {
       direction="column"
       spacing={1}
     >
-      {listUsers.map((user) => (
+      {listUsers.map((user: USER_TYPE) => (
         <Item to={`/chat/${user.id}`} key={user.id}>
           <CoverAvt>
             <Avatar

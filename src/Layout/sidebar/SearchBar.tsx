@@ -1,7 +1,8 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { InputBase, styled } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import React from "react";
+import React, { useState } from "react";
+import { userApi } from "../../api/user";
 
 const SearchBox = styled("form")`
   width: 100%;
@@ -28,10 +29,32 @@ const ButtonIcon = styled("button")`
   cursor: pointer;
 `;
 
-const SearchBar = () => {
+type PropsType = {
+  updateListUser: any;
+};
+
+const SearchBar = ({ updateListUser }: PropsType) => {
+  const [searchVal, setSearchVal] = useState<string>("");
+  const handleSearchUser = async (e: any) => {
+    setSearchVal(e.target.value);
+    const value = e.target.value;
+    setTimeout(() => {
+      searchUser(value);
+    }, 3000);
+  };
+
+  const searchUser = async (value: string) => {
+    const users = await userApi.searchUsers(value);
+    console.log(users);
+    updateListUser(users);
+  };
   return (
     <SearchBox>
-      <SearchInput placeholder="Search user..." />
+      <SearchInput
+        value={searchVal}
+        onChange={(e: any) => handleSearchUser(e)}
+        placeholder="Search user..."
+      />
       <ButtonIcon type="submit">
         <SearchIcon
           sx={{
