@@ -1,14 +1,12 @@
 import { styled, TextField } from "@mui/material";
 import { teal } from "@mui/material/colors";
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 type PropsType = {
   name: string;
   type: string;
   label: string;
-  control: any;
-  error?: any;
 };
 
 const CustomsTextField = styled(TextField)(({ theme }) => ({
@@ -28,17 +26,18 @@ const CustomsTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const RHFTextField = ({ name, type, label, control, error }: PropsType) => {
+const RHFTextField = ({ name, type, label }: PropsType) => {
+  const { control } = useFormContext();
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field }) => (
+      render={({ field, fieldState: { error } }) => (
         <CustomsTextField
           {...field}
           fullWidth
           error={!!error}
-          helperText={error?.message?.message}
+          helperText={error?.message}
           type={type}
           variant="outlined"
           label={label}

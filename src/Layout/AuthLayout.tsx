@@ -21,7 +21,7 @@ const AuthLayout = () => {
           flexDirection: "column",
           alignItems: "center",
           gap: "30px",
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          backgroundColor: "white",
           borderRadius: "10px",
           padding: "30px",
           width: "500px",

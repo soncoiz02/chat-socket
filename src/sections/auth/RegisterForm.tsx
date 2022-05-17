@@ -1,10 +1,10 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { styled } from "@mui/material";
 import React from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import LoadingButton from "../../components/form/LoadingButton";
+import { yupResolver } from "@hookform/resolvers/yup";
 import RHFTextField from "../../components/form/RHFTextField";
+import LoadingButton from "../../components/form/LoadingButton";
+import { styled } from "@mui/material";
 
 const FormGroup = styled("form")`
   display: flex;
@@ -14,8 +14,8 @@ const FormGroup = styled("form")`
   width: 100%;
 `;
 
-const LoginForm = () => {
-  const loginSchema = yup.object().shape({
+const RegisterForm = () => {
+  const registerSchema = yup.object().shape({
     username: yup
       .string()
       .trim()
@@ -26,42 +26,53 @@ const LoginForm = () => {
       .trim()
       .required("Password is required!")
       .min(6, "Password must be at least 6 characters!"),
+    confirmPassword: yup
+      .string()
+      .trim()
+      .oneOf([yup.ref("password")], "Passwords not match!"),
   });
 
   const methods = useForm({
     defaultValues: {
       username: "",
       password: "",
+      confirmPassword: "",
     },
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(registerSchema),
   });
-
   const {
-    setError,
-    handleSubmit,
-    formState: { errors, isSubmitting },
     reset,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
   } = methods;
 
-  const handleLogin: SubmitHandler<{ username: string; password: string }> = (
-    data
-  ) => {
+  const handleRegister: SubmitHandler<{
+    username: string;
+    password: string;
+    confirmPassword: string;
+  }> = (data) => {
     console.log(data);
   };
 
   return (
     <FormProvider {...methods}>
-      <FormGroup onSubmit={handleSubmit(handleLogin)}>
+      <FormGroup onSubmit={handleSubmit(handleRegister)}>
         <RHFTextField name="username" label="Enter your username" type="text" />
         <RHFTextField
           name="password"
           type="password"
           label="Enter your password"
         />
-        <LoadingButton content="Login" isLoading={isSubmitting} />
+        <RHFTextField
+          name="confirmPassword"
+          type="password"
+          label="Confirm your password"
+        />
+        <LoadingButton isLoading={isSubmitting} content="Register" />
       </FormGroup>
     </FormProvider>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
