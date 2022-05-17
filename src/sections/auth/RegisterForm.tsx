@@ -67,7 +67,6 @@ const RegisterForm = () => {
       const response = await userApi.createUser(data);
       const user = await response.user;
       if (!!user) {
-        console.log(user);
         dispatch({
           type: "SET_USER_INFOR",
           payload: user,

@@ -1,10 +1,9 @@
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { cyan, teal } from "@mui/material/colors";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userApi } from "../../api/user";
-import { setUserInfor } from "../../redux/actions/user";
 
 const listAvatars = [
   {
@@ -52,13 +51,16 @@ const listAvatars = [
 const ChooseAvatar = () => {
   const navigate = useNavigate();
   const currentUser = useSelector((state: any) => state.user.infor);
-  console.log(currentUser);
+  const dispatch = useDispatch();
 
   const handleUpdateAvatar = async (link: string) => {
     try {
       const user = await userApi.updateAvatar(currentUser.id, link);
       if (user) {
-        setUserInfor(user);
+        dispatch({
+          type: "SET_USER_INFOR",
+          payload: user,
+        });
         navigate("/");
       }
     } catch (error) {

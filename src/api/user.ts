@@ -30,7 +30,7 @@ export const userApi = {
   },
   async updateAvatar(id: ID_TYPE, avatar: string): Promise<USER_TYPE | any> {
     try {
-      return await axiosClient.patch(`/api/users/${id}`, avatar);
+      return await axiosClient.patch(`/api/users/${id}`, { avatar });
     } catch (error) {
       return error;
     }

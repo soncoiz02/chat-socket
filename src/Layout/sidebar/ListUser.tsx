@@ -1,8 +1,9 @@
-import { Avatar, Stack, styled, Box, Typography } from "@mui/material";
-import { blueGrey, green, grey, pink } from "@mui/material/colors";
-import React from "react";
+import { Avatar, Box, Stack, styled, Typography } from "@mui/material";
+import { blueGrey, green, grey } from "@mui/material/colors";
+import React, { useEffect, useState } from "react";
 import { Link, LinkProps } from "react-router-dom";
-
+import { USER_TYPE } from "../../@types/user";
+import { userApi } from "../../api/user";
 import { users } from "../../mock/user";
 
 const Item = styled(Link)<LinkProps>(({ theme }) => ({
@@ -36,6 +37,20 @@ const HeaderUser = styled("div")`
 `;
 
 const ListUser = () => {
+  const [listUsers, setListUsers] = useState<USER_TYPE[]>([]);
+  const getListUsers = async () => {
+    try {
+      const users = await userApi.getAllUser();
+      if (users) setListUsers(users);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getListUsers();
+  }, []);
+
   return (
     <Stack
       sx={{
@@ -49,7 +64,7 @@ const ListUser = () => {
       direction="column"
       spacing={1}
     >
-      {users.map((user) => (
+      {listUsers.map((user) => (
         <Item to={`/chat/${user.id}`} key={user.id}>
           <CoverAvt>
             <Avatar
