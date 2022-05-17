@@ -5,6 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import RHFTextField from "../../components/form/RHFTextField";
 import LoadingButton from "../../components/form/LoadingButton";
 import { styled } from "@mui/material";
+import { userApi } from "../../api/user";
+import { setUserInfor } from "../../redux/actions/user";
+import { useNavigate } from "react-router-dom";
 
 const FormGroup = styled("form")`
   display: flex;
@@ -52,7 +55,24 @@ const RegisterForm = () => {
     password: string;
     confirmPassword: string;
   }> = (data) => {
-    console.log(data);
+    register(data);
+  };
+
+  const navigate = useNavigate();
+
+  const register = async (data: { username: string; password: string }) => {
+    try {
+      const user = await userApi.createUser(data);
+      if (user.id) {
+        setUserInfor(user);
+        navigate("/avatar");
+      } else {
+        const errorMessage = user.response.data.message;
+        setError("username", { message: errorMessage });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
