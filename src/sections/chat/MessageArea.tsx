@@ -85,7 +85,7 @@ const MessageArea = () => {
         justifyContent: "space-between",
         width: "100%",
         height: "100%",
-        backgroundColor: "rgba(255,255,255,0.8)",
+        backgroundColor: "white",
         borderRadius: 3,
         boxShadow: "0 5px 10px 1px rgba(0, 0, 0, 0.1)",
         padding: "15px",

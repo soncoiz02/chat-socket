@@ -41,7 +41,7 @@ const ListUser = () => {
       sx={{
         overflow: "auto",
         height: "100%",
-        backgroundColor: "rgba(255,255,255,0.8)",
+        backgroundColor: "white",
         borderRadius: 4,
         boxShadow: `0 5px 10px 1px rgba(0, 0, 0, 0.1)`,
         padding: "10px",
@@ -56,6 +56,8 @@ const ListUser = () => {
               sx={{
                 width: 50,
                 height: 50,
+                border: "4px solid white",
+                boxShadow: "0 0 10px 1px rgba(0, 0, 0, 0.1)",
               }}
               src={user.avatar}
             />

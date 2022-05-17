@@ -32,7 +32,7 @@ const Header = () => {
         justifyContent: "space-between",
         width: "100%",
         padding: "10px 20px",
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        backgroundColor: "white",
         borderRadius: 3,
         boxShadow: `0 3px 10px 1px rgba(0, 0, 0, 0.1)`,
       }}
@@ -48,6 +48,8 @@ const Header = () => {
           sx={{
             width: 50,
             height: 50,
+            border: "4px solid white",
+            boxShadow: "0 0 10px 1px rgba(0, 0, 0, 0.1)",
           }}
           src="https://img.freepik.com/free-vector/cute-astronaut-catching-moon-cartoon-vector-icon-illustration_138676-3475.jpg?t=st=1652672879~exp=1652673479~hmac=ce996c81c20a4119d052d9705a897b6ec08e4ca10e068ab90c0aa0609ae559ca&w=740"
         />

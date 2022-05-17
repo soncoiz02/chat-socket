@@ -2,6 +2,7 @@ import React, { ElementType, lazy, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import AuthLayout from "../Layout/AuthLayout";
 import Layout from "../Layout/MainLayout";
+import ChooseAvatar from "../page/main/ChooseAvatar";
 import CheckAuth from "./CheckAuth";
 
 const Loadable = (Component: ElementType) => (props: any) => {
@@ -55,6 +56,14 @@ const Router = () => {
           element: <Register />,
         },
       ],
+    },
+    {
+      path: "avatar",
+      element: (
+        <CheckAuth>
+          <ChooseAvatar />
+        </CheckAuth>
+      ),
     },
     {
       path: "*",

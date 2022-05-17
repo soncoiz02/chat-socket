@@ -16,7 +16,7 @@ const SearchInput = styled(InputBase)(({ theme }) => ({
   color: grey[700],
   borderRadius: 50,
   fontSize: 16,
-  backgroundColor: "rgba(255, 255, 255, 0.8)",
+  backgroundColor: "white",
   boxShadow: `0 5px 10px 1px rgba(0, 0, 0, 0.1)`,
 }));
 
