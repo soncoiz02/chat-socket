@@ -1,10 +1,11 @@
 import { Avatar, Box, Stack, styled, Typography } from "@mui/material";
 import { blueGrey, green, grey } from "@mui/material/colors";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, LinkProps } from "react-router-dom";
 import { USER_TYPE } from "../../@types/user";
-import { userApi } from "../../api/user";
-import { users } from "../../mock/user";
+import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
+import { sortStr } from "../../utils/sortStr";
 
 const Item = styled(Link)<LinkProps>(({ theme }) => ({
   position: "relative",
@@ -40,7 +41,15 @@ type PropsType = {
   listUsers: USER_TYPE[];
 };
 
+const socket = io("http://localhost:8000");
+
 const ListUser = ({ listUsers }: PropsType) => {
+  const currentUser = useSelector((state: any) => state.user.infor);
+  const handleJoinRoom = (uid: string | undefined) => {
+    const id = sortStr(uid + currentUser.id);
+    socket.emit("join", { user: currentUser.username, roomId: id });
+  };
+
   return (
     <Stack
       sx={{
@@ -55,7 +64,11 @@ const ListUser = ({ listUsers }: PropsType) => {
       spacing={1}
     >
       {listUsers.map((user: USER_TYPE) => (
-        <Item to={`/chat/${user.id}`} key={user.id}>
+        <Item
+          to={`/chat/${sortStr(user.id + currentUser.id)}`}
+          key={user.id}
+          onClick={() => handleJoinRoom(user.id)}
+        >
           <CoverAvt>
             <Avatar
               sx={{
